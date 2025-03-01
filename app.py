@@ -20,6 +20,39 @@ app.register_blueprint(filtersbp)
 app.register_blueprint(androidbp)
 
 
+@app.route('/')
+def index():
+    return jsonify({
+        'message': 'Welcome to my image API',
+        '/images': 'To upload or get images',
+        '/actions': {
+            '/resize': {
+                "filename": "image.png",
+                "width": "300",
+                "height": "200"
+            },
+            'preste/:name': {
+                "filename": "image.png"
+            },
+            'rotate': {
+                "filename": "image.png",
+                "degree": "45"
+            },
+            '/flip': {
+                "filename": "image.png",
+                "direction": "horizontal"
+            }
+        },
+        '/filters/blur': {
+            "filename": "image.png",
+            "radius": 4
+        },
+        '/android': {
+            "filename": "image.png"
+        }
+    })
+
+
 
 @app.route('/images', methods=['GET', 'POST'])
 def upload_image():
